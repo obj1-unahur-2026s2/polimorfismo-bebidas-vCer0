@@ -1,9 +1,63 @@
-import example.pepita
+import example.*
+describe "Estudio de sustancias" {
 
-describe "group of tests for pepita" {
+    test "Tito pesa 70 kilos" {
+        assert.equals(70, tito.peso())
+    }
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
-  }
+    test "El whisky con dosis 1 tiene rendimiento 0.9" {
+        assert.equals(0.9, whisky.rendimiento(1))
+    }
 
+    test "El whisky con dosis 2 tiene rendimiento 0.81" {
+        assert.equals(0.81, whisky.rendimiento(2))
+    }
+
+    test "El terere nunca tiene rendimiento menor que 1" {
+        assert.equals(1, terere.rendimiento(5))
+    }
+
+    test "El terere aumenta su rendimiento segun la dosis" {
+        assert.equals(2, terere.rendimiento(20))
+    }
+
+    test "El cianuro siempre tiene rendimiento 0" {
+        assert.equals(0, cianuro.rendimiento(10))
+    }
+
+    test "Tito puede consumir whisky" {
+        tito.consumir(2, whisky)
+        assert.equals(5.67, tito.velocidad())
+    }
+
+    test "Tito puede consumir terere" {
+        tito.consumir(20, terere)
+        assert.equals(14, tito.velocidad())
+    }
+
+    test "Tito puede consumir cianuro" {
+        tito.consumir(20, cianuro)
+        assert.equals(0, tito.velocidad())
+    }
+
+    test "Una nueva bebida reemplaza a la anterior" {
+        tito.consumir(2, whisky)
+        tito.consumir(20, terere)
+
+        assert.equals(14, tito.velocidad())
+    }
+
+    test "El rendimiento del terere con dosis 10 es 1" {
+        assert.equals(1, terere.rendimiento(10))
+    }
+
+    test "El rendimiento del terere con dosis 30 es 3" {
+        assert.equals(3, terere.rendimiento(30))
+    }
+
+    test "La velocidad se calcula usando el peso de Tito" {
+        tito.consumir(1, whisky)
+
+        assert.equals(6.3, tito.velocidad())
+    }
 }
